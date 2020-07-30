@@ -1,32 +1,43 @@
 import java.util.HashMap;
-import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
-
-    private static final String filePath = "data/report.txt"; // string with the filepath
     static HashMap<Integer, User> users = new HashMap<>();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 	    Shop shop = new Shop("Zenyatas Shop", "Schikanedergasse 15, 1040 Wien");
 	    User users = new User("x","x","x","x",0,"x");
-        /*shop.printShop();*/
         System.out.println("");
 	    stockUpShop(shop);
+        waitingTime();
         System.out.println("");
+        shop.printShop();
+        waitingTime();
         addUser(users);
         users.printUsers();
+        waitingTime();
         for(int i = 1; i <= shop.getShops().size(); i++){
             shop.getShops().get(i).stockBelowFive();
         }
+        waitingTime();
         shop.printShop();
-        buyProduct(shop);
+        for(int i = 1; i <= shop.getShops().size(); i++){
+            shop.getShops().get(i).purchaseProduct();
+        }
+        waitingTime();
+        shop.printShop();
+        for(int i = 1; i <= shop.getShops().size(); i++){
+            shop.getShops().get(i).stockBelowFive();
+        }
+        waitingTime();
         shop.printShop();
         users.storeClose();
         users.printUsers();
+
     }
 
     static void stockUpShop(Shop shop) {
-        shop.addProduct("Rainbow T-Shirt ", "A T-Shirt with rainbow colors", 55.99,10, Product.Category.TShirts);
+        shop.addProduct("Rainbow T-Shirt ", "A T-Shirt with rainbow colors", 55.99,15, Product.Category.TShirts);
         shop.addProduct("Biker Jacket ", "A Biker Jacket", 125.59,11, Product.Category.Jackets);
         shop.addProduct("Rolex Patek Philippe ", "Rolex wrist watch", 290770.00,1, Product.Category.Accessories);
         shop.addProduct("Nike Jordan AIR 1 MID ", "Sneaker from Nike", 119.95,12, Product.Category.Shoes);
@@ -41,12 +52,8 @@ public class Main {
         users.addUser("Stephen","Taylder","staylder4@yahoo.co.jp","Melrose Circle",9083,"+86 419 873 7878");
         users.addUser("Julee","Arnoult","jarnoult5@paginegialle.it","Golf Course Parkway",5881,"+86 755 447 6738");
     }
-    static void buyProduct(Shop shop){
-        Random generator = new Random();
-        Object[] userValues = users.entrySet().toArray();
-        Object userValue = userValues[generator.nextInt(userValues.length)];
-        System.out.println("\nUser: "+ users.get(1)+" bought "+shop.get(2));
-        System.out.println("User: "+users.get(3)+" bought "+shop.get(4));
-        System.out.println("User: "+users.get(5)+" bought "+shop.get(6));
+    public static void waitingTime() throws InterruptedException {
+        int waitTime = 5;
+        TimeUnit.SECONDS.sleep(waitTime);
     }
 }

@@ -17,7 +17,6 @@ public class UserMenu {
         System.out.println("3) Display all products where stock is < 5");
         System.out.println("4) Display all products out of stock");
         System.out.println("5) Exit");
-        System.out.println("The menu does basically nothing atm its just \"working\"");
 
         selection = input.nextInt();
         return selection;
