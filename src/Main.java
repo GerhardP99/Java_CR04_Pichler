@@ -5,6 +5,9 @@ public class Main {
     static HashMap<Integer, User> users = new HashMap<>();
 
     public static void main(String[] args) throws InterruptedException {
+        // UserMenu.printMenu();
+
+
 	    Shop shop = new Shop("Zenyatas Shop", "Schikanedergasse 15, 1040 Wien");
 	    User users = new User("x","x","x","x",0,"x");
         System.out.println("");
